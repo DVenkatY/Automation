@@ -11,10 +11,8 @@ import java.util.Properties;
 public class Utilities {
 
     public Logger logger = LogManager.getLogger(Utilities.class);
-    String methodName;
 
     public Map<String,String> readPropertiesFile(String filePath){
-        methodName="readPropertisFile";
         Map<String, String> map=new HashMap<String, String>();
         try {
             Properties prop = new Properties();
@@ -24,7 +22,7 @@ public class Utilities {
                 map.put((String) entry.getKey(), (String) entry.getValue());
             }
         }catch(Exception ex){
-            logger.error(String.format("error in method '%s' and its description is '%s'",methodName,ex.getMessage()));
+            logger.error(String.format("error in method 'readPropertiesFile' and its description is '%s'",ex.getMessage()));
         }
         return map;
     }

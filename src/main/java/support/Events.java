@@ -56,7 +56,7 @@ public class Events extends Base{
         String screenshotPath="";
         try {
             String time = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
-            screenshotPath = currentFilePath + "\\FailedScreenshots\\" + time + ".png";
+            screenshotPath = System.getProperty("user.dir") + "\\target\\" + time + ".png";
             Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
             ImageIO.write(screenshot.getImage(), "png", new File(screenshotPath));
         }catch(Exception ex){

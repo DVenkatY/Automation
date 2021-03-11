@@ -12,18 +12,16 @@ import static support.Base.extentTest;
 public class HardAssertion extends Assertion {
     @Override
     public void onAssertSuccess(IAssert<?> assertCommand) {
-        //test.log(Status.PASS, assertCommand.getMessage());
         extentTest.pass(assertCommand.getExpected().toString());
     }
 
     @Override
     public void onAssertFailure(IAssert<?> assertCommand, AssertionError ex) {
-        extentTest.fail("Expected: "+assertCommand.getExpected().toString()+"<br/>+Actual: "+assertCommand.getActual().toString());
-        /*String details="Actual:"+assertCommand.getActual()+" ; Expected:"+assertCommand.getExpected();
+        String details="Actual:"+assertCommand.getActual()+" ; Expected:"+assertCommand.getExpected();
         try {
-            //test.log(Status.FAIL, details, MediaEntityBuilder.createScreenCaptureFromPath(generics.getScreenshot()).build());
-        } catch (IOException ioex) {
-            System.out.println("problem with file");
-        }*/
+            extentTest.fail(details, MediaEntityBuilder.createScreenCaptureFromPath(Events.getScreenshot()).build());
+        } catch (Exception ioex) {
+            System.out.println("problem with file:"+ioex);
+        }
     }
 }

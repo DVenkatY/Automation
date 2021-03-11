@@ -18,4 +18,13 @@ public class SampleScript extends Base {
         softAssert.assertEquals(CommonPage.isTransferFundsPresent(),"transfer funds present");
         softAssert.assertAll();
     }
+
+
+    @Test
+    public void verifyLinks3(){
+        softAssert.assertEquals(CommonPage.isFindTransactionsPresent(),"find transactions present");
+        softAssert.assertEquals(CommonPage.isTransferFundsPresent(),"transfer funds present");
+        softAssert.assertAll();
+    }
+
 }
