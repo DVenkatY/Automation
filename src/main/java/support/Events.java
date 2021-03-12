@@ -9,6 +9,7 @@ import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 import javax.imageio.ImageIO;
 import java.io.File;
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -56,7 +57,15 @@ public class Events extends Base{
         String screenshotPath="";
         try {
             String time = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
-            screenshotPath = System.getProperty("user.dir") + "\\target\\" + time + ".png";
+            File absPathForScreenshot=new File(System.getProperty("user.dir") + "\\target\\" + time + ".png");
+            File absPathForRoot=new File(System.getProperty("user.dir"));
+            URI uriPathForScreenshot=absPathForScreenshot.toURI();
+            URI uriPathForRoot=absPathForRoot.toURI();
+            URI uriRelativePath=uriPathForRoot.relativize(uriPathForScreenshot);
+            screenshotPath=uriRelativePath.getPath();
+            //screenshotPath = System.getProperty("user.dir") + "\\target\\" + time + ".png";
+            //File absPath=new File(screenshotPath);
+            //URI uriPath=absPath.toURI();
             Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
             ImageIO.write(screenshot.getImage(), "png", new File(screenshotPath));
         }catch(Exception ex){
